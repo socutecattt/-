@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 
 <html lang="zh">
 <head>
@@ -446,6 +446,8 @@ reader.readAsText(file);
 
 function renderAll(){ renderTabs(); renderComposer(); renderList(); renderStat(); document.getElementById(‘randomWrap’).innerHTML=’’; }
 
+document.addEventListener(‘DOMContentLoaded’, function(){
+try{
 document.getElementById(‘search’).oninput = e=>{ searchTxt=e.target.value; renderList(); };
 document.getElementById(‘favFilter’).onclick = function(){
 showFav=!showFav; this.classList.toggle(‘on’,showFav); renderList();
@@ -463,14 +465,21 @@ document.getElementById(‘nightBtn’).onclick = function(){
 document.body.classList.toggle(‘night’);
 const on = document.body.classList.contains(‘night’);
 this.textContent = on ? ‘☀️ 白天’ : ‘🌙 夜间’;
-localStorage.setItem(‘book_night’, on?‘1’:’’);
+try{ localStorage.setItem(‘book_night’, on?‘1’:’’); }catch(e){}
 };
+try{
 if(localStorage.getItem(‘book_night’)){
 document.body.classList.add(‘night’);
 document.getElementById(‘nightBtn’).textContent=‘☀️ 白天’;
 }
+}catch(e){}
 
 renderAll();
+}catch(err){
+document.getElementById(‘list’).innerHTML =
+‘<div class="empty">出了点小状况：’+ (err && err.message ? err.message : err) +’</div>’;
+}
+});
 </script>
 
 </body>
