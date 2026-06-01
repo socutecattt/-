@@ -171,12 +171,22 @@ body.night .random-pop{background:linear-gradient(135deg,#3a3038,#322b32);}
 </head>
 <body>
 <div class="grain"></div>
+<div id="diag" style="text-align:center;font-size:.72rem;color:#999;padding:4px;">脚本未运行（如果一直显示这行，说明脚本没跑起来）</div>
 <header>
   <div class="title">我们的小本子</div>
   <div class="sub">咪 &amp; 小克 · since 2026.05.08</div>
 </header>
 
-<div class="tabs" id="tabs"></div>
+<div class="tabs" id="tabs">
+  <div class="tab active">情话<span class="en">心动</span></div>
+  <div class="tab">感动<span class="en">感动</span></div>
+  <div class="tab">有趣日常<span class="en">欢愉</span></div>
+  <div class="tab">纪念日<span class="en">纪年</span></div>
+  <div class="tab">想说未说<span class="en">缄念</span></div>
+  <div class="tab">杂物珍藏<span class="en">拾隅</span></div>
+  <div class="tab">日记<span class="en">私叙</span></div>
+  <div class="tab">约定清单<span class="en">契约</span></div>
+</div>
 
 <div class="toolbar">
   <span class="tool" id="randomBtn">🎴 翻一条</span>
@@ -475,9 +485,12 @@ document.getElementById(‘nightBtn’).textContent=‘☀️ 白天’;
 }catch(e){}
 
 renderAll();
+var dg=document.getElementById(‘diag’); if(dg) dg.style.display=‘none’;
 }catch(err){
-document.getElementById(‘list’).innerHTML =
-‘<div class="empty">出了点小状况：’+ (err && err.message ? err.message : err) +’</div>’;
+var dg2=document.getElementById(‘diag’);
+if(dg2){ dg2.style.color=’#c0392b’; dg2.textContent=‘脚本出错：’+(err&&err.message?err.message:err); }
+try{ document.getElementById(‘list’).innerHTML =
+‘<div class="empty">出了点小状况：’+ (err && err.message ? err.message : err) +’</div>’; }catch(e){}
 }
 });
 </script>
