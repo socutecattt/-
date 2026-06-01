@@ -210,6 +210,7 @@ body.night .random-pop{background:linear-gradient(135deg,#3a3038,#322b32);}
 </div>
 
 <script>
+try{ document.getElementById('diag').textContent='脚本启动了…'; document.getElementById('diag').style.color='#2e8b57'; }catch(e){}
 const DRAWERS = [
   {key:'xindong', zh:'情话',     en:'心动'},
   {key:'wenyu',   zh:'感动',     en:'感动'},
@@ -456,7 +457,7 @@ reader.readAsText(file);
 
 function renderAll(){ renderTabs(); renderComposer(); renderList(); renderStat(); document.getElementById(‘randomWrap’).innerHTML=’’; }
 
-document.addEventListener(‘DOMContentLoaded’, function(){
+(function init(){
 try{
 document.getElementById(‘search’).oninput = e=>{ searchTxt=e.target.value; renderList(); };
 document.getElementById(‘favFilter’).onclick = function(){
@@ -492,7 +493,7 @@ if(dg2){ dg2.style.color=’#c0392b’; dg2.textContent=‘脚本出错：’+(e
 try{ document.getElementById(‘list’).innerHTML =
 ‘<div class="empty">出了点小状况：’+ (err && err.message ? err.message : err) +’</div>’; }catch(e){}
 }
-});
+})();
 </script>
 
 </body>
